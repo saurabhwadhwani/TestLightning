@@ -1,0 +1,42 @@
+<aura:component controller="recordOwnerCtrl"
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+                access="global" >
+    <aura:attribute name="objId" type="String"  />
+    
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="oUser" type="user" default="{'sobjectType' : 'User'}" />
+  	
+    
+    <p class="slds-p-horizontal_small">
+        <div class="slds-grid slds-grid_vertical">
+            <div class="slds-col slds-size_1-of-2">
+             	<div class="slds-grid ">   
+                    <div class="slds-col slds-size_1-of-2">
+             			Record Owner Name:
+                    </div>    
+                    <div class="slds-col slds-size_1-of-2">
+             			{!v.oUser.Name}
+                    </div>   
+             	</div>    
+                
+                
+            </div>
+            <br/><br/><br/><br/>
+            <div class="slds-col slds-size_1-of-2">
+                
+                <div class="slds-grid ">   
+                    <div class="slds-col slds-size_1-of-2">
+             			Record Owner Profile Picture:
+                    </div>    
+                    <div class="slds-col slds-size_1-of-2">
+             			<img src="{!v.oUser.FullPhotoUrl}" alt="{!v.oUser.Name}"/>
+                    </div>   
+             	</div>    
+                 
+                   
+            </div>
+        </div>
+    </p>
+    
+</aura:component>
