@@ -1,0 +1,32 @@
+public class recordOwnerCtrl {
+    
+  
+  @AuraEnabled public Id userId {get;set;}
+    public Id RecordId  {get;set;} 
+	
+
+    
+  @AuraEnabled 
+    public static user fetchUserDetail(Id recordId){
+       
+        recordOwnerCtrl obj = new recordOwnerCtrl();
+        obj.userId  = recordId;
+        system.debug('SObject Details '+ obj.userId);
+        Schema.SObjectType sobjectType = obj.userId.getSObjectType();
+  		String sobjectName = sobjectType.getDescribe().getName();
+		system.debug('SObject Details '+ sobjectName);
+        system.debug('SObject Details '+ obj.userId);
+  		SObject record = Database.query('Select Id, Name,OwnerId From ' + sobjectName + ' Where Id = \'' + obj.userId + '\' limit 1' ); 
+      	system.debug('SObject Details '+ record);
+        
+        obj.userId = (string)record.get('OwnerID');
+        Schema.SObjectType sobjectUser = obj.userId.getSObjectType();
+  		String sobjectUserName = sobjectUser.getDescribe().getName();
+		system.debug('SObject Details '+ sobjectUserName);
+        system.debug('SObject Details '+ obj.userId);
+  		SObject record2 = Database.query('Select Id, Name,FullPhotoUrl From ' + sobjectUserName + ' Where Id = \'' + obj.userId + '\' limit 1' ); 
+      	
+        system.debug('SObject Details '+ record2);
+        return (User)record2;
+    }
+}
